@@ -29,7 +29,7 @@
                     @click="showCreateModal"
                   >
                     <b-icon-plus class="text-white"></b-icon-plus>
-                    <span class="h6 text-white">New Customer</span>
+                    <span class="h6 text-white">New User</span>
                   </b-button>
                 </b-col>
               </b-row>
@@ -223,11 +223,11 @@
         this.$refs["edit-customer-modal"].hide();
       },
       setFilterTotalIsActive() {
-        this.tableHeader = "Total Customers";
+        this.tableHeader = "Total Users";
         this.getCustomerData();
       },
       setFilterActiveIsActive() {
-        this.tableHeader = "Active Customers";
+        this.tableHeader = "Active Users ";
         this.items = this.activeCustomersData;
       },
       showAlertCreate() {

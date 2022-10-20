@@ -21,75 +21,47 @@ export default {
       menu: [
         {
           header: true,
-          // title: "Getting Started"
+          // title: "Getting Started" <i class="fa-thin fa-paper-plane"></i>
         },
         {
           href: "/light-line",
           title: "light line",
-          icon: "fa fa-download"
+          icon: "fa fa-list-ul"
         },
         {
           href: "/plane",
           title: "plane",
-          icon: "fa fa-code"
+          icon: "fa fa-plane"
         },
         {
           href: "/contact",
           title: "contact",
-          icon: "fa fa-code"
+          icon: "fa fa-address-book"
         },
         {
           href: "/user",
           title: "User",
-          icon: "fa fa-list-ul",
-          child: [
-            {
-              href: "/page/sub-page-1",
-              title: "Sub Page 01",
-              icon: "fa fa-file-alt"
-            },
-            {
-              href: "/page/sub-page-2",
-              title: "Sub Page 02",
-              icon: "fa fa-file-alt"
-            }
-          ]
+          icon: "fa fa-user",
+       
         }
-        ,
-        {
-          href: "/contact",
-          title: "Contact",
-          icon: "fa fa-list-ul",
-          child: [
-            {
-              href: "/page/sub-page-1",
-              title: "Sub Page 01",
-              icon: "fa fa-file-alt"
-            },
-            {
-              href: "/page/sub-page-2",
-              title: "Sub Page 02",
-              icon: "fa fa-file-alt"
-            }
-          ]
-        }
+      
         ,
         {
           href: "/departement",
           title: "Departement",
           icon: "fa fa-list-ul",
-          child: [
-            {
-              href: "/page/sub-page-1",
-              title: "Sub Page 01",
-              icon: "fa fa-file-alt"
-            },
-            {
-              href: "/page/sub-page-2",
-              title: "Sub Page 02",
-              icon: "fa fa-file-alt"
-            }
-          ]
+          // child: [
+          //   {
+          //     href: "/page/sub-page-1",
+          //     title: "Sub Page 01",
+          //     icon: "fa fa-file-alt"
+          //   },
+          //   {
+          //     href: "/page/sub-page-2",
+          //     title: "Sub Page 02",
+          //     icon: "fa fa-file-alt"
+          //   }
+          // ]
         }
       ],
       collapsed: true

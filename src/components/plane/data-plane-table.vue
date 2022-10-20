@@ -1,6 +1,6 @@
 <template>
 
-
+<layout-default>
     <div>
         <!-- <HeaderBar/> -->
       <b-row>
@@ -9,10 +9,10 @@
         </b-alert>
       </b-row>
       <b-row>
-        <customer-overview
+        <overview
           :totalCustomers="numberOfCustomers"
           :activeCustomers="activeCustomers"
-        ></customer-overview>
+        ></overview>
       </b-row>
       <b-row class="mt-3">
         <b-card>
@@ -88,11 +88,11 @@
         hide-footer
         title="New Customer"
       >
-        <create-customer-form
+        <create-form
           @closeCreateModal="closeCreateModal"
           @reloadDataTable="getCustomerData"
           @showSuccessAlert="showAlertCreate"
-        ></create-customer-form>
+        ></create-form>
       </b-modal>
   
       <!-- Modal for updating customers -->
@@ -102,12 +102,12 @@
         hide-footer
         title="Edit Customer"
       >
-        <edit-customer-form
+        <edit-form
           @closeEditModal="closeEditModal"
           @reloadDataTable="getCustomerData"
           @showSuccessAlert="showAlertUpdate"
           :customerId="customerId"
-        ></edit-customer-form>
+        ></edit-form>
       </b-modal>
   
       <!-- Delete Customer Modal -->
@@ -117,31 +117,33 @@
         hide-footer
         title="Confirm Deletion"
       >
-        <delete-customer-modal
+        <delete-modal
           @closeDeleteModal="closeDeleteModal"
           @reloadDataTable="getCustomerData"
           @showDeleteAlert="showDeleteSuccessModal"
           :customerId="customerId"
-        ></delete-customer-modal>
+        ></delete-modal>
       </b-modal>
-    </div>
+    </div></layout-default>
   </template>
  
   <script>
   import axios from "axios";
-  import CustomerOverview from "@/CustomerOverview.vue";
-  import CreateCustomerForm from "@/CreateCustomerForm.vue";
-  import EditCustomerForm from "@/EditCustomerForm.vue";
-  import DeleteCustomerModal from "@/DeleteCustomerModal.vue";
-  import HeaderBar from "@/DeleteCustomerModal.vue";
+  import Overview from "./Overview.vue";
+  import CreateCustomerForm from "./CreateForm.vue";
+  import EditForm from "./EditForm.vue";
+  import DeleteModal from "./DeleteModal.vue";
+  import LayoutDefault from "@/layouts/LayoutDefault.vue";
+
   
   export default {
     components: {
-      CustomerOverview,
+      Overview,
       CreateCustomerForm,
-      EditCustomerForm,
-      DeleteCustomerModal,
-      HeaderBar
+      EditForm,
+      DeleteModal,
+      LayoutDefault
+    
     },
     data() {
       return {
