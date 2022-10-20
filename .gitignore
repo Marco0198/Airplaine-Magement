@@ -21,3 +21,10 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+/build/
+/config/
+/dist/
+/*.js
+/test/unit/coverage/
+
+/000-xyz/
