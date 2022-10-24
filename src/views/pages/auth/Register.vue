@@ -1,57 +1,38 @@
 <template>
-  <Layout name="LayoutDefault">
-    <div>
+    <div class=" body">
       <base-form>
         <h3 class="mb-4">Sign Up</h3>
         <form @submit.stop.prevent="handleSubmit">
           <div class="alert alert-success" v-if="message && message.message">
             <p>{{ message.message }}</p>
           </div>
-          <div class="alert alert-danger" v-if="errors && errors.errors">
-            <p>{{ errors.message }}</p>
+          <div class="alert alert-danger" v-if="errors ">
+            <p>{{ errors}}</p>
           </div>
           <div class="text-danger .fs-2" v-if="errors && errors.errors">
             <small>{{ errors.errors.message }}</small>
           </div>
-          <div class="form-group">
-            <label for="name" class="float-left">Name</label>
+          <div class="form-group mb-3">
+            <label for="name" class="float-left">Username</label>
             <input
               type="text"
-              v-model="$v.user.name.$model"
-              id="name"
-              name="name"
-              placeholder="Name"
-              class="form-control"
-              :class="{ 'is-invalid': $v.user.name.$error }"
+              v-model="$v.user.username.$model"
+              id="username"
+              name="username"
+              placeholder="User Name"
+              class="form-control "
+              :class="{ 'is-invalid': $v.user.username.$error }"
             />
-            <span v-if="!$v.user.name.required" class="invalid-feedback">
-              Name is required</span
+            <span v-if="!$v.user.username.required" class="invalid-feedback">
+              UserName is required</span
             >
-            <span v-if="!$v.user.name.minLength" class="invalid-feedback"
-              >name must be at least 3 characters</span
+            <span v-if="!$v.user.username.minLength" class="invalid-feedback"
+              >username must be at least 3 characters</span
             >
-            <!--  <div class="alert alert-danger" v-if="errors && errors.errors">
-                    <p>{{errors.errors.name[0]}}</p>
-                </div>-->
+        
           </div>
-          <div class="form-group">
-            <label for="surname" class="float-left">Surname</label>
-            <input
-              v-model="$v.user.surname.$model"
-              id="surname"
-              name="surname"
-              placeholder="Surname"
-              class="form-control"
-              :class="{ 'is-invalid': $v.user.surname.$error }"
-            />
-            <div v-if="$v.user.surname.$error" class="invalid-feedback">
-              <span v-if="!$v.user.surname.required"> Surname is required</span>
-              <span v-if="!$v.user.surname.minLength"
-                >Surname must be at least 3 characters</span
-              >
-            </div>
-          </div>
-          <div class="form-group">
+       
+          <div class="form-group mb-3">
             <label for="email" class="float-left">Email</label>
             <input
               v-model="$v.user.email.$model"
@@ -70,30 +51,8 @@
             </div>
           </div>
 
-          <div class="form-group">
-            <label for="phone" class="float-left">Phone number</label>
-            <input
-              v-model="$v.user.phone.$model"
-              id="phone"
-              name="phone"
-              placeholder="Phone Number"
-              class="form-control"
-              :class="{ 'is-invalid': $v.user.phone.$error }"
-            />
-            <div v-if="$v.user.email.$error" class="invalid-feedback">
-              <span v-if="!$v.user.phone.required"
-                >phone number is required</span
-              >
-              <span v-if="!$v.user.phone.minLength"
-                >phone number min length is 10</span
-              >
-              <span v-if="!$v.user.phone.maxLength"
-                >phone number max length is 10</span
-              >
-            </div>
-          </div>
 
-          <div class="form-group">
+          <div class="form-group mb-3">
             <label for="password" class="float-left">Password</label>
             <input
               type="password"
@@ -117,26 +76,7 @@
                     <p>{{errors.errors.password[0]}}</p>
                 </div> -->
           </div>
-          <div class="form-group">
-            <label for="confirmPassword" class="float-left">Password Confirmation</label>
-            <input
-              type="password"
-              v-model="$v.user.confirmPassword.$model"
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder="Confirm password"
-              class="form-control"
-              :class="{ 'is-invalid': $v.user.confirmPassword.$error }"
-            />
-            <div v-if="$v.user.confirmPassword.$error" class="invalid-feedback">
-              <span v-if="!$v.user.confirmPassword.required"
-                >Confirm Password is required</span
-              >
-              <span v-else-if="!$v.user.confirmPassword.sameAsPassword"
-                >Passwords must match</span
-              >
-            </div>
-          </div>
+        
 
           <div class="form-group">
             <button
@@ -150,34 +90,28 @@
         </form>
       </base-form>
     </div>
-  </Layout>
 </template>
 
 <script>
-  import Layout from "@/layouts/Layout";
   import {
     required,
     email,
     minLength,
-    sameAs,
-    maxLength,
+
   } from "vuelidate/lib/validators";
   import BaseForm from "@/components/UI/BaseForm.vue";
   import axios from "axios";
   export default {
     components: {
       BaseForm,
-      Layout,
     },
     data() {
       return {
         user: {
-          name: "",
-          surname: "",
+          username: "",
           email: "",
-          phone: "",
           password: "",
-          confirmPassword: "",
+        
         },
         submitted: false,
         success: false,
@@ -188,11 +122,7 @@
     },
     validations: {
       user: {
-        name: {
-          required,
-          minLength: minLength(3),
-        },
-        surname: {
+        username: {
           required,
           minLength: minLength(3),
         },
@@ -200,19 +130,12 @@
           required,
           email,
         },
-        phone: {
-          required,
-          minLength: minLength(10),
-          maxLength: maxLength(10),
-        },
+      
         password: {
           required,
           minLength: minLength(8),
-        },
-        confirmPassword: {
-          required,
-          sameAsPassword: sameAs("password"),
-        },
+        }
+       
       },
     },
     methods: {
@@ -227,43 +150,30 @@
         this.message = "";
         this.errors = "";
         let formData = {
-          name: this.user.name,
-          surname: this.user.surname,
+          username: this.user.username,
           email: this.user.email,
-          phone: this.user.phone,
           password: this.user.password,
-          password_confirmation: this.user.confirmPassword,
         };
 
         console.log(formData),
           axios
-            .post("https://mmt-web.herokuapp.com/api/register", formData, {})
+            .post("http://localhost:7000/api/auth/signup", formData, {})
             .then((res) => {
               (this.success = true), (this.submitted = false);
               this.message = res.data;
               this.$router.push({ path: "/login" });
 
-              //  console.log(this.message)
-              //     this.user ={
-              //     name: null,
-              //     email: null,
-              //     password: null,
-              //     confirmPassword: null,
-
-              // }
+             
             })
             .catch((error) => {
-              if (error.response.status == 422) {
+              if (error) {
                 this.success = false;
-                this.errors = error.response.data;
-                //      console.log(this.errors.message)
-                this.errors = error.response.data;
+                this.errors = error.response.data.message;
+                 console.log(this.errors.message)
               }
-              // this.message = this.errors.errors.email[0]
-              //  console.log(this.message)
+        
             })
             .finally(() => {
-              // this.message=null;
 
               this.submitStatus = false;
             });
@@ -271,3 +181,8 @@
     },
   };
 </script>
+<style scoped>
+.body{
+  margin-top: 10%;
+}
+</style>

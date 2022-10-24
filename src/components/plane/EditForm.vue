@@ -73,7 +73,7 @@
       },
       getCusomterByID() {
         axios
-          .get(`http://localhost:7000/plane/read/${this.customerId}`)
+          .get(`http://localhost:7000/api/plane/read/${this.customerId}`)
           .then((response) => {
             this.plane = response.data;
           })
@@ -84,7 +84,7 @@
       updateCustomer() {
         axios
           .put(
-            `http://localhost:7000/plane/update/${this.customerId}`,
+            `http://localhost:7000/api/plane/update/${this.customerId}`,
             this.plane
           )
           .then((response) => {

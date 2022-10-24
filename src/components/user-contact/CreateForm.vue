@@ -55,7 +55,7 @@
   import axios from "axios";
   
   export default {
-    name: "CreateModal",
+    name: "CreateCustomerModal",
     data() {
       return {
         plane: {},
@@ -67,7 +67,7 @@
       },
       addNewCustomer() {
         axios
-          .post("http://localhost:7000/api/plane/save", this.plane)
+          .post("http://localhost:7000/plane/save", this.plane)
           .then((response) => {
             console.log(response.data);
             this.$emit("closeCreateModal");

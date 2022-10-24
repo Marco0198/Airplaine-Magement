@@ -2,7 +2,7 @@
     <div>
       <b-row class="mt-2 mb-3">
         <h6 class="text-secondary">
-          Are you sure you want to delete this plane from this system?
+          Are you sure you want to delete this customer from your CRM?
         </h6>
       </b-row>
       <b-row class="mt-2 mb-3">
@@ -38,7 +38,7 @@
       },
       removeCustomerFromData() {
         axios
-          .delete(`http://localhost:7000/api/plane/delete/${this.customerId}`)
+          .delete(`http://localhost:7000/plane/delete/${this.customerId}`)
           .then(() => {
             this.$emit("reloadDataTable");
             this.$emit("showDeleteAlert");

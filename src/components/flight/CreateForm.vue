@@ -2,15 +2,15 @@
     <b-form class="mt-3">
       <b-row>
         <b-row>
-          <h4 class="text-secondary">Plane Details </h4>
+          <h4 class="text-secondary">flight  Details </h4>
         </b-row>
         <b-col cols="6">
-          <b-form-group id="Capacity " label="Capacity " label-for="Capacity ">
+          <b-form-group id="contact " label="contact " label-for="contact ">
             <b-form-input
-              id="Capacity"
-              type="text"
-              placeholder="Capacity "
-              v-model="plane.capacity"
+              id="contact"
+              type="contact"
+              placeholder="contact"
+              v-model="contact.contact"
             ></b-form-input>
           </b-form-group>
         </b-col>
@@ -20,28 +20,17 @@
               id="model"
               type="text"
               placeholder="model"
-              v-model="plane.model"
+              v-model="contact.description"
             ></b-form-input>
           </b-form-group>
         </b-col>
       </b-row>
-      <b-row class="mt-3">
-        <b-col cols="6">
-          <b-form-group id="name" label="Name" label-for="Name">
-            <b-form-input
-              id="Name"
-              type="Name"
-              placeholder="Name"
-              v-model="plane.name"
-            ></b-form-input>
-          </b-form-group>
-        </b-col>
-      </b-row>
+  
    
       <b-row class="mt-4">
         <b-col cols="3">
           <b-button variant="primary" class="px-5" @click="addNewCustomer"
-            >Add Plane</b-button
+            >Add flight </b-button
           >
         </b-col>
         <b-col>
@@ -55,10 +44,10 @@
   import axios from "axios";
   
   export default {
-    name: "CreateModal",
+    name: "CreateCustomerModal",
     data() {
       return {
-        plane: {},
+        contact : {},
       };
     },
     methods: {
@@ -67,7 +56,7 @@
       },
       addNewCustomer() {
         axios
-          .post("http://localhost:7000/api/plane/save", this.plane)
+          .post("http://localhost:7000/contact/save", this.contact)
           .then((response) => {
             console.log(response.data);
             this.$emit("closeCreateModal");

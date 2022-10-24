@@ -1,32 +1,30 @@
 <template>
-  <div class="LayoutDefault ">
-    <div>
+    <div class="box">
       <base-form>
         <h3 class="mb-4">Sign In</h3>
         <form @submit.prevent="handleSubmit">
-          <div class="alert alert-danger" v-if="errors && errors.errors">
+          <!-- <div class="alert alert-danger" v-if="errors && errors.errors">
             <p>{{ errors.message }}</p>
-          </div>
+          </div> -->
           <div class="form-group" >
             <label for="email" class="float-left">Username</label>
             <input
               v-model="$v.user.username.$model"
               id="email"
-              name="email"
+              name="username"
               placeholder="username"
-              class="form-control"
+              class="form-control mb-4"
               :class="{ 'is-invalid': $v.user.username.$error }"
             />
             <div v-if="$v.user.username.$error" class="invalid-feedback">
               <span v-if="!$v.user.username.required">Username is required</span>
-              <!-- <span v-if="!$v.user.email.email">Username is invalid</span> -->
+              <!-- <span v-if="!$v.user.email.email">Email is invalid</span> -->
             </div>
-            <div class="text-danger .fs-2" v-if="errors && errors.errors">
-              <small>{{ errors.errors.username[0] }}</small>
-            </div>
+            <!-- <div class="text-danger .fs-2" v-if="errors && errors.errors">
+            </div> -->
           </div>
 
-          <div class="form-group ">
+          <div class="form-group mt-3 ">
             <label for="password" class="float-left">Password</label>
             <input
               type="password"
@@ -45,40 +43,34 @@
                 >Password must be at least 8 characters</span
               >
             </div>
-            <div class="text-danger mt-3" v-if="errors">
               <p>
-                <small>{{ errors.password }}</small>
+                <!-- <small>{{ errors.password }}</small> -->
               </p>
-            </div>
+         
           </div>
 
           <div class="form-group">
             <button
               class="btn btn-danger"
               type="submit"
-              :disabled="submitStatus || $v.$invalid"
-            >
-              Login <b-spinner small v-if="submitStatus"></b-spinner>
+              :disabled=" $v.$invalid"
+            >Login
+              <!-- Login <b-spinner small v-if="loadingStatus"></b-spinner> -->
             </button>
           </div>
-          <!-- <router-link to="/register">Register</router-link><br />
-          <router-link to="/request_token">Forgot Password</router-link> -->
+          <router-link to="/register">Register</router-link><br />
         </form>
       </base-form>
     </div>
-  </div>
 </template>
 
 <script>
-  import Layout from "@/layouts/Layout";
-  import { required, email, minLength } from "vuelidate/lib/validators";
+  import { required,  minLength } from "vuelidate/lib/validators";
   import BaseForm from "@/components/UI/BaseForm.vue";
-  import axios from "axios"
 
   export default {
     components: {
       BaseForm,
-      Layout,
     },
     data() {
       return {
@@ -86,18 +78,14 @@
           username: "",
           password: "",
         },
-  submitted: false,
-  success: false,
-  submitStatus: false,
-  errors: "",
-  message: "",
+       // errors:""
       };
     },
     validations: {
       user: {
         username: {
           required,
-          
+      
         },
         password: {
           required,
@@ -107,78 +95,28 @@
     },
     methods: {
       handleSubmit() {
-        this.submitStatus = true;
-    // context.commit('loadingStatus',true)
-    (this.success = false), (this.errors = ""), (this.message = "");
-    let formData = {
-      username: this.user.username,
-      password: this.user.password,
-    };
-
-  console.log(formData)
-    // axios
-    //   .get("http://localhost:8080/login", {headers:{
-    //                 "Authorization": 'Basic ' + window.btoa(formData.username + ":" + formData.password)
-    //             }} )
-    //   .then((res) => {
-    //     if (res.data) {
-    //     //  context.commit("loginStatus", true);
-    //        console.log( res.data)
-    //     // (state.success = true),
-    //     //    (state.submitted = false),
-    //       // localStorage.setItem("token", res.data.token);
-    //      // router.push({ path: "/taskboard" });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     if (error.response.status == 422) {
-    //       // context.commit('loginStatus',false)
-    //       (this.success = false), (this.errors = error.response.data);
-    //     }
-
-    //     //  console.log( state.errors)
-    //   })
-    //   .finally(() => {
-    //     //state.isLogin =false,
-    //     this.submitStatus = false;
-    //   });
-    let config = {
-  method: 'get',
-  url: 'http://localhost:8080/login',
-  headers: { 
-    'Authorization': 'Basic Z3JlZzp0dXJucXVpc3Q='
-  }
-};
-
-axios(config)
-.then(function (response) {
-  console.log(JSON.stringify(response.data));
-})
-.catch(function (error) {
-  console.log(error);
-});
-  
-
-
+        this.$store.dispatch("login/handleSubmit", {
+          username: this.user.username,
+          password: this.user.password,
+        });
       },
     },
     computed: {
-      // loadingStatus() {
-      //   return this.$store.getters["login/loadingStatus"];
-      // },
-      // errors() {
-      //   return this.$store.getters["login/errors"];
-      // },
-      // success() {
-      //   return this.$store.getters["login/success"];
-      // },
+      loadingStatus() {
+        return this.$store.getters["login/loadingStatus"];
+      },
+      errors() {
+        return this.$store.getters["login/errors"];
+      },
+      success() {
+        return this.$store.getters["login/success"];
+      },
     },
   };
 </script>
-<style scoped>
-.LayoutDefault{
-  margin: auto;
-  justify-content: center;
-  margin-top: 200px;
+<style lang="css" scoped>
+.box{
+  margin-top:100px;
 }
 </style>
+

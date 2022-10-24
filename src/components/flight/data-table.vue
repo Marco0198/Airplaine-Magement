@@ -1,6 +1,8 @@
 <template>
 <LayoutDefault>
+
     <div>
+        <!-- <HeaderBar/> -->
       <b-row>
         <b-alert v-model="showSuccessAlert" variant="success" dismissible>
           {{ alertMessage }}
@@ -27,7 +29,7 @@
                     @click="showCreateModal"
                   >
                     <b-icon-plus class="text-white"></b-icon-plus>
-                    <span class="h6 text-white">New Flght Line</span>
+                    <span class="h6 text-white">New flight </span>
                   </b-button>
                 </b-col>
               </b-row>
@@ -84,7 +86,7 @@
         ref="create-customer-modal"
         size="xl"
         hide-footer
-        title="New Customer"
+        title="New flight "
       >
         <create-form
           @closeCreateModal="closeCreateModal"
@@ -133,14 +135,13 @@
   import DeleteModal from "./DeleteModal.vue";
   import LayoutDefault from "@/layouts/LayoutDefault.vue";
 
-  
   export default {
     components: {
       Overview,
       CreateForm,
       EditForm,
       DeleteModal,
-      LayoutDefault
+      LayoutDefault 
     },
     data() {
       return {
@@ -153,16 +154,52 @@
             sortable: false,
           },
           {
-            key: "description",
-            label: "Description",
+            key: "departureDateAndTime",
+            label: "",
             sortable: false,
           },
           {
-            key: "departure",
-            label: "Departure",
+            key: "arrivalDateAndTime",
+            label: "Contact",
             sortable: false,
           },
-         
+          {
+            key: "description",
+            label: "Description",
+            sortable: false,
+          }, {
+            key: "arrivalDateAndTime",
+            label: "Arrival Date And Time",
+            sortable: false,
+          },
+          {
+            key: "departureLocation",
+            label: "Departure Location",
+            sortable: false,
+          },
+          {
+            key: "plane.id",
+            label: "Plane ID",
+            sortable: false,
+          },
+          {
+            key: "plane.name",
+            label: "Plane name",
+            sortable: false,
+          },
+          {
+            key: "plane.capacity",
+            label: "Plane Capacity",
+            sortable: false,
+          },
+          {
+            key: "plane.model",
+            label: "Plane Model",
+            sortable: false,
+          },
+          
+
+       
           "actions",
         ],
         items: [],
@@ -188,7 +225,7 @@
       },
       getCustomerData() {
         axios
-          .get("http://localhost:7000/flight-line/findAll")
+          .get("http://localhost:7000/api/flight/findAll")
           .then((response) => {
             this.tableHeader = "Total Customer";
             this.items = response.data;
@@ -207,20 +244,20 @@
         this.$refs["edit-customer-modal"].hide();
       },
       setFilterTotalIsActive() {
-        this.tableHeader = "Total flight line";
+        this.tableHeader = "Total ";
         this.getCustomerData();
       },
       setFilterActiveIsActive() {
-        this.tableHeader = "Active flight line";
+        this.tableHeader = "Active ";
         this.items = this.activeCustomersData;
       },
       showAlertCreate() {
         this.showSuccessAlert = true;
-        this.alertMessage = "flight line was created successfully!";
+        this.alertMessage = "flight was created successfully!";
       },
       showAlertUpdate() {
         this.showSuccessAlert = true;
-        this.alertMessage = "flight line was updated successfully";
+        this.alertMessage = "flight was updated successfully";
       },
       showDeleteModal(id) {
         this.$refs["delete-customer-modal"].show();
@@ -231,7 +268,7 @@
       },
       showDeleteSuccessModal() {
         this.showSuccessAlert = true;
-        this.alertMessage = "flight line was deleted successfully!";
+        this.alertMessage = "flight  was deleted successfully!";
       },
     },
   };

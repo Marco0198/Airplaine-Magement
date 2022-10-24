@@ -8,6 +8,10 @@ import dataTable from "../components/plane/data-plane-table.vue"
 import dataUserTable from "../components/user/data-user-table.vue"
 import flightLine from "@/components/flight-line/data-flight-line-table.vue"
 import Contact from "@/components/contact/data-table.vue"
+import UserContact from "@/components/user-contact/data-table.vue"
+import Flight from "@/components/flight/data-table.vue"
+
+
 
 Vue.use(VueRouter)
 
@@ -16,28 +20,51 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+   
   },
   {
     path: "/plane",
     name: "dataTable",
     component: dataTable,
+    meta:{needAuth:true},
+    beforeEnter: ifAuthenticated
   },
   
   {
-    path: "/light-line",
+    path: "/flight-line",
     name: "flightLine ",
     component: flightLine ,
+    meta:{needAuth:true},
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/flight",
+    name: "Fligh ",
+    component: Flight ,
+    meta:{needAuth:true},
+    beforeEnter: ifAuthenticated
+  },
+  {
+    path: "/user-contact",
+    name: "UserContact ",
+    component: UserContact,
+    meta:{needAuth:true},
+    beforeEnter: ifAuthenticated
   },
   {
     path: "/user",
     name: "user",
     component: dataUserTable ,
+    meta:{needAuth:true},
+    beforeEnter: ifAuthenticated
   },
  
   {
     path: "/contact",
     name: "Contact",
     component: Contact,
+    meta:{needAuth:true},
+    beforeEnter: ifAuthenticated
   },
  
  
@@ -45,6 +72,7 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login,
+    
    
   },
  
@@ -68,5 +96,12 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+function ifAuthenticated  (to, from, next)  {  
+  if (localStorage.getItem("token")) { console.log("login done");
+   next(); 
+   return;
+ }
+  router.push({  name: 'login' });
+}
 
 export default router

@@ -24,7 +24,7 @@ export default {
           // title: "Getting Started" <i class="fa-thin fa-paper-plane"></i>
         },
         {
-          href: "/light-line",
+          href: "/flight-line",
           title: "light line",
           icon: "fa fa-list-ul"
         },
@@ -47,22 +47,47 @@ export default {
       
         ,
         {
-          href: "/departement",
-          title: "Departement",
-          icon: "fa fa-list-ul",
-          // child: [
-          //   {
-          //     href: "/page/sub-page-1",
-          //     title: "Sub Page 01",
-          //     icon: "fa fa-file-alt"
-          //   },
-          //   {
-          //     href: "/page/sub-page-2",
-          //     title: "Sub Page 02",
-          //     icon: "fa fa-file-alt"
-          //   }
-          // ]
-        }
+          href: "/flight",
+          title: "Filght",
+          icon: "fa fa-list-ul"       
+        },
+        {
+          href: "/user-contat",
+          title: "Contact",
+          icon: "fa fa-list-ul"       
+        },
+        {
+          href: "/user-role",
+          title: "User Role",
+          icon: "fa fa-list-ul"       
+        },
+        {
+          href: "/role",
+          title: "Role",
+          icon: "fa fa-list-ul"       
+        },
+        {
+          href: "/tiket",
+          title: "Tiket",
+          icon: "fa fa-list-ul"       
+        },
+        {
+          href: "/line",
+          title: "Tiket",
+          icon: "fa fa-list-ul"       
+        },
+        {
+          href: "/hostess",
+          title: "Hostess",
+          icon: "fa fa-list-ul"       
+        },
+        {
+          href: "/flight-pilot",
+          title: "Pilot",
+          icon: "fa fa-list-ul"       
+        },
+
+        
       ],
       collapsed: true
     };

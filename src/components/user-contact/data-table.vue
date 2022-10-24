@@ -1,6 +1,8 @@
 <template>
-<LayoutDefault>
+
+<layout-default>
     <div>
+        <!-- <HeaderBar/> -->
       <b-row>
         <b-alert v-model="showSuccessAlert" variant="success" dismissible>
           {{ alertMessage }}
@@ -27,7 +29,7 @@
                     @click="showCreateModal"
                   >
                     <b-icon-plus class="text-white"></b-icon-plus>
-                    <span class="h6 text-white">New Flght Line</span>
+                    <span class="h6 text-white">New  user contact</span>
                   </b-button>
                 </b-col>
               </b-row>
@@ -122,9 +124,9 @@
           :customerId="customerId"
         ></delete-modal>
       </b-modal>
-    </div></LayoutDefault>
+    </div></layout-default>
   </template>
-  
+ 
   <script>
   import axios from "axios";
   import Overview from "./Overview.vue";
@@ -141,6 +143,7 @@
       EditForm,
       DeleteModal,
       LayoutDefault
+    
     },
     data() {
       return {
@@ -153,16 +156,20 @@
             sortable: false,
           },
           {
-            key: "description",
-            label: "Description",
+            key: "user.name.firstName",
+            label: "FirstName",
             sortable: false,
           },
           {
-            key: "departure",
-            label: "Departure",
+            key: "model",
+            label: "Model",
             sortable: false,
           },
-         
+          {
+            key: "name",
+            label: "Name",
+            sortable: false,
+          },
           "actions",
         ],
         items: [],
@@ -188,7 +195,7 @@
       },
       getCustomerData() {
         axios
-          .get("http://localhost:7000/flight-line/findAll")
+          .get("http://localhost:7000/user-contact/findAll")
           .then((response) => {
             this.tableHeader = "Total Customer";
             this.items = response.data;
@@ -207,20 +214,20 @@
         this.$refs["edit-customer-modal"].hide();
       },
       setFilterTotalIsActive() {
-        this.tableHeader = "Total flight line";
+        this.tableHeader = "Total Plane";
         this.getCustomerData();
       },
       setFilterActiveIsActive() {
-        this.tableHeader = "Active flight line";
+        this.tableHeader = "Active Plane";
         this.items = this.activeCustomersData;
       },
       showAlertCreate() {
         this.showSuccessAlert = true;
-        this.alertMessage = "flight line was created successfully!";
+        this.alertMessage = "plane was created successfully!";
       },
       showAlertUpdate() {
         this.showSuccessAlert = true;
-        this.alertMessage = "flight line was updated successfully";
+        this.alertMessage = "plane  was updated successfully";
       },
       showDeleteModal(id) {
         this.$refs["delete-customer-modal"].show();
@@ -231,7 +238,7 @@
       },
       showDeleteSuccessModal() {
         this.showSuccessAlert = true;
-        this.alertMessage = "flight line was deleted successfully!";
+        this.alertMessage = "plane was deleted successfully!";
       },
     },
   };
