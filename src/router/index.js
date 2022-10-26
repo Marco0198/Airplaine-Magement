@@ -10,6 +10,8 @@ import flightLine from "@/components/flight-line/data-flight-line-table.vue"
 import Contact from "@/components/contact/data-table.vue"
 import UserContact from "@/components/user-contact/data-table.vue"
 import Flight from "@/components/flight/data-table.vue"
+import Tikect from "@/components/tickect/data-table.vue"
+
 
 
 
@@ -45,8 +47,15 @@ const routes = [
     beforeEnter: ifAuthenticated
   },
   {
+    path: "/tikect",
+    name: "Tikect ",
+    component: Tikect ,
+    meta:{needAuth:true},
+    beforeEnter: ifAuthenticated
+  },
+  {
     path: "/user-contact",
-    name: "UserContact ",
+    name: "User Contact ",
     component: UserContact,
     meta:{needAuth:true},
     beforeEnter: ifAuthenticated
@@ -87,6 +96,8 @@ const routes = [
     path: "/:catchAll(.*)",
     name: "NotFound",
     component: NotFound,
+    meta:{needAuth:true},
+    beforeEnter: ifAuthenticated
    
   },
 ]
